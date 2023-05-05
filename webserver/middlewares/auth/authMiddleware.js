@@ -1,24 +1,21 @@
-import errorStatus from "../../helpers/errorStatus.js";
-import authServices from "../../services/authServices.js";
+import errorStatus from "../../../helpers/errorStatus.js";
+import authService from "../../../services/authService.js";
 
 export default function authMiddleware(req, res, next) {
-  // Get token from header
-  const token = req.header("Authorization");
-
-  const authService = authServices();
+  // Get token from cookie
+  const token = req.cookies["X-accessToken"];
+  const authservice = authService()
   if (!token) {
     const error = new Error("You Must Login | No access token found");
-    error.statusCode = 403;
-    throw error;
+    res.redirect("/login");
   }
-  if (token.split(" ")[0] !== "Bearer") {
-    throw new Error("Invalid access token format");
-  }
+
   try {
-    const decoded = authService.verify(token.split(" ")[1]);
+    const decoded = authservice.verify(token);
+    console.log(decoded)
     req.user = decoded.user;
     next();
   } catch (err) {
-    throw new errorStatus(err);
+    throw errorStatus(err);
   }
 }

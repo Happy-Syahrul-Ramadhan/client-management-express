@@ -1,54 +1,64 @@
 import errorStatus from "../helpers/errorStatus.js";
+import authService from "../services/authService.js";
 import userServices from "../services/userService.js";
-
-const config = process.env;
 
 class UserControllers {
   repository = new userServices();
+  authServies = authService();
 
-  fetchUserById = (req, res, next) => {
+
+  loginPage = (req, res, next) => {
+    res.render("loginPage");
+  };
+
+  registerPage = (req, res, next) => {
+    res.render("registerPage");
+  };
+  register = (req, res, next) => {
+    const { username, password, password2, email, phone } = req.body;
     this.repository
-      .findById(req.params.id)
-      .then((user) => res.json(user))
+      .signin(username, password, password2, email, phone)
+      .then(async (user) => {
+        const { access, refresh } = await this.repository.login(
+          email,
+          password
+        );
+        res.cookie("X-accessToken", access, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+        });
+        res.cookie("X-refreshToken", refresh, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+        });
+        res.redirect("/");
+      })
       .catch((error) => next(error));
   };
-
-  dashboardUser = async (req, res, next) => {
-    const userId = req.user;
-    try {
-      const user = await this.repository.findById(userId.id);
-      res.status(200).json(user);
-    } catch (error) {
-      next(error);
-    }
-  };
-
-  updateUser = async (req, res, next) => {
-    const userId = req.user.id;
-    const { username } = req.body;
-    try {
-      const newUser = await this.repository.updateUser(userId, username);
-      res.status(200).json(newUser);
-    } catch (error) {
-      next(error);
-    }
-  };
-
-  deleteUser = async (req, res, next) => {
-    const user = req.user;
-    try {
-      await this.repository.deleteUser(user.id);
-      res.status(203);
-    } catch (error) {
-      next(error);
-    }
-  };
-
-  register = (req, res, next) => {
-    const { username, password, password2, email } = req.body;
+  registerMentor = (req, res, next) => {
+    const { username, password, password2, email, phone } = req.body;
     this.repository
-      .signin(username, password, password2, email)
-      .then((user) => res.json(user))
+      .signinMentor(username, password, password2, email, phone)
+      .then(async (user) => {
+        const { access, refresh } = await this.repository.login(
+          email,
+          password
+        );
+        res.cookie("X-accessToken", access, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+        });
+        res.cookie("X-refreshToken", refresh, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+        });
+
+        res.redirect("/");
+      })
       .catch((error) => next(error));
   };
 
@@ -56,35 +66,37 @@ class UserControllers {
     try {
       const { email, password } = req.body;
       const { access, refresh } = await this.repository.login(email, password);
-      res
-        .json({
-          access,
-          refresh,
-        })
-        .status(200);
-    } catch (error) {
-      next(error);
-    }
-  };
-
-  verifyEmail = async (req, res, next) => {
-    const { email } = req.body;
-    try {
-      const user = await this.repository.verifyEmail(email);
-      res.status(200).json(user);
+      res.cookie("X-accessToken", access, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      });
+      res.cookie("X-refreshToken", refresh, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      });
+      res.redirect("/");
     } catch (error) {
       next(error);
     }
   };
 
   logout = async (req, res, next) => {
-    const { refresh } = req.body;
+    // get refresh token from cookies
+    const refresh = req.cookies["X-refreshToken"];
+
     if (!refresh) {
       res.status(403).json({ message: "you not login" });
     } else {
       try {
+        // clear cookies
+        res.clearCookie("X-accessToken");
+        res.clearCookie("X-refreshToken");
+        // delete refresh token in database
         await this.repository.logout(refresh);
-        res.json({ message: "success logout", status: 200 });
+
+        res.redirect("/login");
       } catch (error) {
         throw errorStatus(error, 500);
       }
