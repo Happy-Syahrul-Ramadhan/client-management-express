@@ -11,7 +11,7 @@ function omit(obj, ...props) {
 export default function userRepository() {
   const findByPropertyLogin = (params) =>
     UserModel.find(omit(params)).select(
-      "-__v -role -createdAt -updatedAt"
+      "-__v -createdAt -updatedAt"
     );
 
   const countAll = (params) => UserModel.countDocuments(omit(params));
@@ -24,6 +24,8 @@ export default function userRepository() {
         username: user.username,
         password: user.password,
         email: user.email,
+        phone: user.phone,
+        role: user.role,
       });
 
       return { username, email };
