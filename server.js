@@ -23,5 +23,15 @@ app.get('/mentor', function (req, res) {
     res.render('pages/mentor');
 });
 
+// login page
+app.get('/login', function (req, res) {
+    res.render('pages/login');
+});
+
+// Register page
+app.get('/register', function (req, res) {
+    res.render('pages/register');
+});
+
 app.listen(8080);
 console.log('8080 is the magic port');
