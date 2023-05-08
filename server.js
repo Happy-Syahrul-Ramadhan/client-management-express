@@ -4,6 +4,7 @@ var app = express();
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
+app.use('layout','')
 app.use(express.static("./public"))
 
 // use res.render to load up an ejs view file
@@ -16,6 +17,11 @@ app.get('/', function (req, res) {
 // user page
 app.get('/client', function (req, res) {
     res.render('pages/client');
+});
+
+// user page
+app.get('/update_client', function (req, res) {
+    res.render('pages/update_client');
 });
 
 // mentor page
@@ -51,6 +57,11 @@ app.get('/register', function (req, res) {
 // Transaksi page
 app.get('/transaksi', function (req, res) {
     res.render('pages/transaksi');
+});
+
+// notification page
+app.get('/notification', function (req, res) {
+    res.render('partials/notification');
 });
 
 app.listen(8080);
