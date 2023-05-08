@@ -114,11 +114,23 @@ class UserServices {
     return this.repository.findByProperty(params);
   }
 
-  async updateUser(id, username, phone) {
-    if (!username || !phone) {
+  async dashboardAdmin(){
+    // TODO: add a proper validation (consider using @hapi/joi), add last 10 Order 
+    let data ={}
+    const mentor = await this.repository.findLast10Mentor()
+    const client = await this.repository.findLast10User()
+    // data order
+    return data = {
+      mentor,
+      client
+    }
+  }
+
+  async updateUser(id, username) {
+    if (!username) {
       throw new Error("Form is not valid");
     }
-    const newUser = await this.repository.updateById(id, { username, phone });
+    const newUser = await this.repository.updateById(id, { username });
     return newUser;
   }
 
