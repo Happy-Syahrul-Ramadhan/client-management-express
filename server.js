@@ -14,13 +14,23 @@ app.get('/', function (req, res) {
 });
 
 // user page
-app.get('/about', function (req, res) {
-    res.render('pages/about');
+app.get('/client', function (req, res) {
+    res.render('pages/client');
 });
 
 // mentor page
 app.get('/mentor', function (req, res) {
     res.render('pages/mentor');
+});
+
+// add mentor page
+app.get('/add_mentor', function (req, res) {
+    res.render('pages/add_mentor');
+});
+
+// Update mentor page
+app.get('/update_mentor', function (req, res) {
+    res.render('pages/update_mentor');
 });
 
 // login page
@@ -31,6 +41,11 @@ app.get('/login', function (req, res) {
 // Register page
 app.get('/register', function (req, res) {
     res.render('pages/register');
+});
+
+// Transaksi page
+app.get('/transaksi', function (req, res) {
+    res.render('pages/transaksi');
 });
 
 app.listen(8080);
