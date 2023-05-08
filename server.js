@@ -33,6 +33,11 @@ app.get('/update_mentor', function (req, res) {
     res.render('pages/update_mentor');
 });
 
+// info mentor page
+app.get('/info_mentor', function (req, res) {
+    res.render('pages/info_mentor');
+});
+
 // login page
 app.get('/login', function (req, res) {
     res.render('pages/login');
