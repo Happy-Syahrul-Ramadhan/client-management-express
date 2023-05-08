@@ -11,7 +11,6 @@ export default function (app) {
     express.urlencoded({ limit: "15mb", extended: true, parameterLimit: 50000 })
   );
   app.set('view engine', 'ejs');
-  app.use(express.static('../public'));
   app.use(cookieParser());
   app.use((req, res, next) => {
     // Website you wish to allow to connect

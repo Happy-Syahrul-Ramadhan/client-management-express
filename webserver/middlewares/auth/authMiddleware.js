@@ -12,7 +12,6 @@ export default function authMiddleware(req, res, next) {
 
   try {
     const decoded = authservice.verify(token);
-    console.log(decoded)
     req.user = decoded.user;
     next();
   } catch (err) {

@@ -3,9 +3,8 @@ import authService from "../services/authService.js";
 import userServices from "../services/userService.js";
 
 class UserControllers {
-  repository = new userServices();
+  services = new userServices();
   authServies = authService();
-
 
   loginPage = (req, res, next) => {
     res.render("loginPage");
@@ -16,13 +15,10 @@ class UserControllers {
   };
   register = (req, res, next) => {
     const { username, password, password2, email, phone } = req.body;
-    this.repository
+    this.services
       .signin(username, password, password2, email, phone)
       .then(async (user) => {
-        const { access, refresh } = await this.repository.login(
-          email,
-          password
-        );
+        const { access, refresh } = await this.services.login(email, password);
         res.cookie("X-accessToken", access, {
           httpOnly: true,
           secure: true,
@@ -39,13 +35,10 @@ class UserControllers {
   };
   registerMentor = (req, res, next) => {
     const { username, password, password2, email, phone } = req.body;
-    this.repository
+    this.services
       .signinMentor(username, password, password2, email, phone)
       .then(async (user) => {
-        const { access, refresh } = await this.repository.login(
-          email,
-          password
-        );
+        const { access, refresh } = await this.services.login(email, password);
         res.cookie("X-accessToken", access, {
           httpOnly: true,
           secure: true,
@@ -65,7 +58,7 @@ class UserControllers {
   login = async (req, res, next) => {
     try {
       const { email, password } = req.body;
-      const { access, refresh } = await this.repository.login(email, password);
+      const { access, refresh } = await this.services.login(email, password);
       res.cookie("X-accessToken", access, {
         httpOnly: true,
         secure: true,
@@ -94,7 +87,7 @@ class UserControllers {
         res.clearCookie("X-accessToken");
         res.clearCookie("X-refreshToken");
         // delete refresh token in database
-        await this.repository.logout(refresh);
+        await this.services.logout(refresh);
 
         res.redirect("/login");
       } catch (error) {
@@ -110,7 +103,7 @@ class UserControllers {
       return res.status(403).json({ message: "Refresh Token is required!" });
     }
     try {
-      const { access, refresh } = await this.repository.refreshToken(
+      const { access, refresh } = await this.services.refreshToken(
         requestToken
       );
       res
@@ -119,6 +112,31 @@ class UserControllers {
           refresh,
         })
         .status(200);
+    } catch (error) {
+      next(error);
+    }
+  };
+  updateUser = async (req, res, next) => {
+    const userId = req.user.id;
+    const { username } = req.body;
+    try {
+      const newUser = await this.services.updateUser(userId, username);
+      res.status(200).json(newUser);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  DashboardAdmin = async (req, res, next) => {
+    const userId = req.user.id;
+    try {
+      const user = await this.services.findById(userId);
+      if (user.role !== "admin") {
+        next(errorStatus("you not allowed", 403));
+      }
+      const data = await this.services.dashboardAdmin();
+      // render page/admin with data
+      res.render("pages/admin", { data });
     } catch (error) {
       next(error);
     }
