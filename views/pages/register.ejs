@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); -%>
+</head>
+
+<body class="page-top bg-gradient-primary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 mb-4 text-dark" style="font-weight: bold;">Register !</h1>
+                                    </div>
+                                    <form class="user">
+                                        <div class="form-group">
+                                            <input style="height: 45px;" name="name" type="text" class="form-control form-control"
+                                                id="exampleInputText" placeholder="Input Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <input style="height: 45px;" name="username" type="text" class="form-control form-control"
+                                                id="exampleInputText" placeholder="Input Username">
+                                        </div>
+                                        <div class="form-group">
+                                            <input style="height: 45px;" name="email" type="email" class="form-control form-control"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address...">
+                                        </div>
+                                        <div class="form-group">
+                                            <input style="height: 45px;" name="telepon" type="number" class="form-control form-control"
+                                                id="exampleInputNumber" aria-describedby="number"
+                                                placeholder="Enter No Telepon...">
+                                        </div>
+                                        <div class="form-group">
+                                            <input style="height: 45px;" name="password" type="password"
+                                                class="form-control form-control" id="exampleInputPassword"
+                                                placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <input style="height: 45px;" name="password" type="password"
+                                                class="form-control form-control" id="exampleInputPassword"
+                                                placeholder="Confirm Password">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                        <hr>
+                                        <a href="#" class="btn btn-danger btn-block">
+                                            <i class="fab fa-google fa-fw"></i> Login with Google
+                                        </a>
+                                        <a href="#" class="btn btn-info btn-block">
+                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                        </a>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="/login">Login!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

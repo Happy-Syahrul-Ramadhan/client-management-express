@@ -1,5 +1,5 @@
 
-export default function authMiddleware(req, res, next) {
+export default function noAuthMiddleware(req, res, next) {
   // Get token from header
   const token = req.cookies["X-accessToken"];
 

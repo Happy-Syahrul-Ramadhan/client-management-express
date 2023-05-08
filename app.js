@@ -15,7 +15,9 @@ const app = express();
 const server = http.createServer(app);
 
 // config App (Middleware,dll)
+
 configApp(app);
+app.use(express.static('./public'));
 
 configServer(app, mongoose, server, config).startServer();
 

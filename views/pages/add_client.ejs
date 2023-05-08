@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); -%>
+</head>
+
+<body class="page-top">
+    <%- include('../partials/header'); -%>
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <!-- 404 Error Text -->
+            <div class="text-dark">
+                <h4>Data Mentor</h4>
+            </div>
+            <p class="text-center"><a href="/mentor" class="btn btn-primary"> <-- Back</a></p>
+            <form action="">
+                <table class="table table-bordered text-left">
+                    <tr>
+                        <th>Name</th>
+                        <th><input class="form-group form-control" type="text" placeholder="Input name"></th>
+                    </tr>
+                    <tr>
+                        <th width="20">Name Mentor</th>
+                        <th>
+                            <select name="mentor" class="form-control form-group">
+                                <option value="nama_mentor">-- Select Mentor --</option>
+                                <option value="nama_mentor">Mentor 1</option>
+                                <option value="nama_mentor">Mentor 2</option>
+                            </select>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Username</th>
+                        <th><input class="form-group form-control" type="text" placeholder="Input Username"></th>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <th><input class="form-group form-control" type="text" placeholder="Input Email"></th>
+                    </tr>
+                    <tr>
+                        <th>No Telepon</th>
+                        <th><input class="form-group form-control" type="number" placeholder="Input No Telepon"></th>
+                    </tr>
+                    <tr>
+                        <th width="20">Role</th>
+                        <th>
+                            <select name="mentor" class="form-control form-group">
+                                <option value="nama_mentor">-- Select Role --</option>
+                                <option value="nama_mentor">Client</option>
+                                <option value="nama_mentor">Mentor</option>
+                            </select>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th><button class="btn btn-primary" type="submit">Submit</button></th>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        </div>
+
+        <%- include('../partials/footer'); -%>
+</body>
+
+</html>
