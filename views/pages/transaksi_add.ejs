@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+    <%- include('../partials/head'); -%>
+</head>
+
+<body class="page-top">
+    <%- include('../partials/header'); -%>
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid"> 
+            <!-- 404 Error Text -->
+            <div class="text-dark">
+                <h4>Form Transaksi Client</h4>
+            </div>
+            <p class="text-center"><a href="/mentor" class="btn btn-primary"> <-- Back</a></p>
+            <form action="">
+                <table class="table table-bordered text-left">
+                    <tr>
+                        <th>Name</th>
+                        <th><input class="form-group form-control" type="text" placeholder="Input Name"></th>
+                    </tr>
+                    <tr>
+                        <th width="20">Jenis Consultation</th>
+                        <th>
+                            <select name="mentor" class="form-control form-group">
+                                <option value="nama_mentor">-- Select --</option>
+                                <option value="nama_mentor">Tesis</option>
+                                <option value="nama_mentor">Skeipsi</option>
+                                <option value="nama_mentor">Penelitian</option>
+                            </select>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th width="20">Paket</th>
+                        <th>
+                            <select name="mentor" class="form-control form-group">
+                                <option value="nama_mentor">-- Select Paket --</option>
+                                <option value="nama_mentor">Paket 1 ( 1 BAB ) Rp. 1.000.000</option>
+                                <option value="nama_mentor">Paket 2 ( Beberapa BAB ) Rp. 2.000.000</option>
+                                <option value="nama_mentor">Paket 3 ( Full Service ) Rp. 3.000.000</option>
+                            </select>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th width="20">Payment</th>
+                        <th>
+                            <select name="mentor" class="form-control form-group">
+                                <option value="nama_mentor">-- Select Payment --</option>
+                                <option value="nama_mentor"> 100% </option>
+                                <option value="nama_mentor"> 50 % </option>
+                                <option value="nama_mentor"> 30 % </option>
+                            </select>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <th><input class="form-group form-control" type="email" placeholder="Input Email"></th>
+                    </tr>
+                    <tr>
+                        <th>No Telepon</th>
+                        <th><input class="form-group form-control" type="number" placeholder="Input No Telepon"></th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th><button class="btn btn-primary" type="submit">Submit</button></th>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        </div>
+
+        <%- include('../partials/footer'); -%>
+</body>
+
+</html>
