@@ -4,7 +4,7 @@ var app = express();
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
-app.use('layout','')
+app.use('layout', '')
 app.use(express.static("./public"))
 
 // use res.render to load up an ejs view file
@@ -40,8 +40,8 @@ app.get('/update_mentor', function (req, res) {
 });
 
 // info mentor page
-app.get('/info_mentor', function (req, res) {
-    res.render('pages/info_mentor');
+app.get('/mentor_detail', function (req, res) {
+    res.render('pages/mentor_detail');
 });
 
 // login page
@@ -62,7 +62,7 @@ app.get('/transaksi', function (req, res) {
 // notification page
 app.get('/notification', function (req, res) {
     res.render('partials/notification');
-}); 
+});
 
 app.listen(8080);
 console.log('8080 is the magic port');
