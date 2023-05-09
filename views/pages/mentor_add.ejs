@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head> 
     <%- include('../partials/head'); -%>
 </head>
 
@@ -12,14 +12,22 @@
         <div class="container-fluid">
             <!-- 404 Error Text -->
             <div class="text-dark">
-                <h4>Update Data Mentor</h4>
+                <h4>Add Data Mentor</h4>
             </div>
             <p class="text-center"><a href="/mentor" class="btn btn-primary"> <-- Back</a></p>
             <form action="">
                 <table class="table table-bordered text-left">
                     <tr>
-                        <th>Username</th> 
+                        <th>Name</th>
+                        <th><input class="form-group form-control" type="text" placeholder="Input name"></th>
+                    </tr>
+                    <tr>
+                        <th>Username</th>
                         <th><input class="form-group form-control" type="text" placeholder="Input Username"></th>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <th><input class="form-group form-control" type="text" placeholder="Input Email"></th>
                     </tr>
                     <tr>
                         <th>No Telepon</th>
