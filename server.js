@@ -4,7 +4,6 @@ var app = express();
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
-app.use('layout', '')
 app.use(express.static("./public"))
 
 // use res.render to load up an ejs view file
@@ -28,6 +27,7 @@ app.get('/update_client', function (req, res) {
 app.get('/mentor', function (req, res) {
     res.render('pages/mentor');
 });
+
 
 // add mentor page
 app.get('/add_mentor', function (req, res) {
@@ -59,10 +59,20 @@ app.get('/transaksi', function (req, res) {
     res.render('pages/transaksi');
 });
 
+// Transaksi detail page
+app.get('/transaksi-detil', function (req, res) {
+    res.render('pages/transaksi_detail');
+});
+
+// Transaksi add page
+app.get('/transaksi_add', function (req, res) {
+    res.render('pages/transaksi_add');
+});
+
 // notification page
 app.get('/notification', function (req, res) {
     res.render('partials/notification');
 });
 
-app.listen(8080);
-console.log('8080 is the magic port');
+app.listen(8000);
+console.log(`Express server listening on http://127.0.0.1:8000/, in %s mode`)
